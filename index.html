@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>Mathematics BINGO Card Generator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <form>
+    <input type="text" id="input-equation" placeholder="f(x)=e^{x}">
+    <button type="button" onclick="addEquation(getElementById('input-equation').value)">Add equation</button>
+    <button type="button" onclick="clearEquations()">Clear equations</button>
+    <button type="button" onclick="buildTable(newEquations)">Generate new BINGO card</button>
+  </form>
+
+  <div class="row">
+    <div class="column">
+    <table id="equation-list" class="equationTable">
+      <thead>
+        <tr>
+          <th>Raw Text</th>
+          <th>Formatted Equation</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    </div>
+    <div class="column">
+      <table id="bingo-table" class="bingoTable" align="center"></table>
+    </div>
+  </div>
+</body>
+
+<script src="build-table.js"></script>
+</html>
