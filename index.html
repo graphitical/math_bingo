@@ -8,6 +8,7 @@
           src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
 </head>
 
 <body>
@@ -16,6 +17,8 @@
     <button type="button" onclick="addEquation(getElementById('input-equation').value)">Add equation</button>
     <button type="button" onclick="clearEquations()">Clear equations</button>
     <button type="button" onclick="buildTable(newEquations)">Generate new BINGO card</button>
+    <button type="button" onclick="convertToImage()">Save BINGO card</button>
+    <div id="result"></div>
   </form>
 
   <div class="row">

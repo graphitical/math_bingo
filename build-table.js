@@ -125,5 +125,15 @@ function clearEquations() {
   // console.log(newEquations)
 }
 
+function convertToImage() {
+  var resultDiv = document.getElementById("result");
+  html2canvas(document.getElementById("bingo-table"), {
+      onrendered: function(canvas) {
+          var img = canvas.toDataURL("image/png");
+          result.innerHTML = '<a download="Image.jpeg" href="'+img+'">test</a>';
+          }
+  });
+}
+
 let equations = shuffle(defaultEquations.split(","));
 buildTable(equations);
