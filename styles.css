@@ -1,9 +1,13 @@
 .bingoTable {
   width: 1000px;
   text-align: center;
-  background-color: #FFFFF0;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
   /* border: 3px solid black */
   border-collapse: collapse;
+  /* table-layout: fixed; */
+  font-family: Arial, Helvetica, sans-serif
 }
 
 .bingoTable th {
@@ -13,8 +17,7 @@
 .bingoTable td {
   width: 200px;
   height: 200px;
-  font-size: .8em;
-  vertical-align: middle;
+  font-size: 2em;
   border: 2px solid black;
 }
 
@@ -31,7 +34,7 @@
 
 .equationTable td {
   vertical-align: middle;
-  border: 2px solid black;
+  border: 0px solid black;
 }
 
 body {
@@ -43,27 +46,55 @@ body {
 }
 
 .row {
-  margin-left: -5px;
-  margin-right:-5px;
+  overflow: hidden;
 }
 
-.column {
+.floatLeft {
   float: left;
-  width: 20%;
-  padding: 5px;
+  /* width: 15%; */
+  padding-right: 1em;;
+}
+
+.floatRight {
+  float: left;
+  /* width: 50%; */
 }
 
 .del-btn {
   height: 20px;
   line-height: 20px;
   width: 20px;
-  font-size: 2em;
-  display: block;
-  font-weight: bold;
-  border-radius: 50%;
-  border-width: 0;
-  background-color: red;
-  color: white;
+  margin: 0 auto;
+  padding: 0px;
+  display: inline-block;
   text-align: center;
+  vertical-align: middle;
+
+  background-color: crimson;
+  color: white;
+
+  font-size: 1em;
+  font-weight: bold;
+
+  border-radius: 20%;;
+  border-width: 0;
+  padding: 0px 0px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+
   cursor: pointer;
+}
+
+.del-btn:hover {
+  background-color: darkred;
+}
+
+@media print {
+  * {
+    display: none;
+  }
+  #printableTable {
+    display: block;
+  }
 }

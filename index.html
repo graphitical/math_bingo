@@ -4,41 +4,106 @@
 <title>Mathematics BINGO Card Generator</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script>
+  <script src="load-mathjax.js" async></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js" async></script>
 </head>
 
 <body>
-  <form>
-    <input type="text" id="input-equation" placeholder="f(x)=e^{x}">
-    <button type="button" onclick="addEquation(getElementById('input-equation').value)">Add equation</button>
-    <button type="button" onclick="clearEquations()">Clear equations</button>
-    <button type="button" onclick="buildTable(newEquations)">Generate new BINGO card</button>
-    <button type="button" onclick="convertToImage()">Save BINGO card</button>
-    <div id="result"></div>
-  </form>
+  <h1>Maths BINGO - $\beta$ version</h1>
+  <p>
+    Maths BINGO is a simple way to place LaTeX based math equations into a standard 5x5 BINGO card.<br>
+    <h4>Use</h4>
+    To use, simply:
+    <ol>
+      <li>Type your equation into the text field using LaTeX markup. If you don't know how <a href=https://editor.codecogs.com/>this</a> may help.</a></li>
+      <li>Click the *Add Equation* button, or hit the *Enter* key once done.</li>
+      <li>Repeat until you have entered all the equations you wish.</li>
+    </ol>
+    You can preview all the equations you've entered on the left. If you find you've made a mistake you can hit the red delete button next to the equation.<br>
+    Or you can hit the *Clear Equations* button, but be careful with that one. It cannot be undone. 
 
-  <div class="row">
-    <div class="column">
-    <table id="equation-list" class="equationTable">
-      <thead>
-        <tr>
-          <th>Raw Text</th>
-          <th>Formatted Equation</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <h4>Generating A Card</h4>
+    The card will first have just $x$ to fill all the spots. They will always fill up the remainder of the table.<br>
+    Once you have created 24 equations you should no longer see any $x$ (unless you put a $x$ in yourself).<br>
+    As you add equations they will automatically fill the card in a random order so you will see them move around a bit.<br>
+    You can also click the *Shuffle* button to rearrange the equations you see.<br>
+    Ideally, you will have many more than 24 equations, so you may not see all of them on the card. That's ok, they aren't lost, just waiting for a new card.<br>
+    Go ahead and click *Shuffle* or *Save* to scramble them up again.
 
-    </div>
-    <div class="column">
-      <table id="bingo-table" class="bingoTable" align="center"></table>
-    </div>
+    <h4>Saving A Card *Experimental*</h4>
+    You can save a card as a PNG file to print on your own. Just click the *Save* button.<br>
+    A new tab should be generated with your image to save.<br>
+    There has been minimal testing with this so it is the most likely part to break right now.<br>
+    If you need a higher resolution (i.e. larger) image try zooming in your browser (Ctrl +) and saving again.<br>
+    Finally, if there are any issues when you try to save, just try hitting that *Save* button again. It may just work...
+  
+  </p>
+  <div class="input">
+      Input:
+      <input type="text" id="eq-input" value="f(x)=e^x" placeholder="f(x)=e^x" autocomplete="off">
+      <button type="button" onclick="addEquation(getElementById('eq-input').value)">Add Equation</button>
+      <button type="button" onclick="buildTable()">Shuffle</button>
+      <button type="button" onclick="clearEquations()">Clear Equations</button>
+      <button type="button" onclick="saveTable()">Save Card</button>
   </div>
+
+  <div class="content">
+      <div class="floatLeft">
+        <table id="eq-list" class="equationTable">
+          <thead><th colspan=2>Equation List</th></thead>
+        </table>
+      </div>
+      <div class="floatRight">
+        <table id="bingo-table" class="bingoTable" valign="middle">
+          <thead>
+            <tr>
+              <th id="B">B</td>
+              <th id="I">I</td>
+              <th id="N">N</td>
+              <th id="G">G</td>
+              <th id="O">O</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="sq1">&nbsp;</td>
+              <td id="sq2">&nbsp;</td>
+              <td id="sq3">&nbsp;</td>
+              <td id="sq4">&nbsp;</td>
+              <td id="sq5">&nbsp;</td>
+            </tr>
+            <tr>
+              <td id="sq6">&nbsp;</td>
+              <td id="sq7">&nbsp;</td>
+              <td id="sq8">&nbsp;</td>
+              <td id="sq9">&nbsp;</td>
+              <td id="sq10">&nbsp;</td>
+            </tr>
+            <tr>
+              <td id="sq11">&nbsp;</td>
+              <td id="sq12">&nbsp;</td>
+              <td id="sq13">&nbsp;</td>
+              <td id="sq14">&nbsp;</td>
+              <td id="sq15">&nbsp;</td>
+            </tr>
+            <tr>
+              <td id="sq16">&nbsp;</td>
+              <td id="sq17">&nbsp;</td>
+              <td id="sq18">&nbsp;</td>
+              <td id="sq19">&nbsp;</td>
+              <td id="sq20">&nbsp;</td>
+            </tr>
+            <tr>
+              <td id="sq21">&nbsp;</td>
+              <td id="sq22">&nbsp;</td>
+              <td id="sq23">&nbsp;</td>
+              <td id="sq24">&nbsp;</td>
+              <td id="sq25">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 </body>
 
 <script src="build-table.js"></script>
