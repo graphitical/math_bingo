@@ -138,7 +138,7 @@ function saveTable() {
       SVGToImage({
         svg: svg,
         width: r.width,
-        height: r.height*1.5,
+        height: r.height,
         outputFormat: 'blob'
       }).then(function(blob){
         let img = document.createElement('img');
