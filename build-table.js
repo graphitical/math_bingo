@@ -151,12 +151,22 @@ function saveTable() {
     }
     await sleep(1000);
     html2canvas(document.getElementById('bingo-table')).then(function(canvas) {
-      window.open(canvas.toDataURL('image/png'), '_blank');
+      let url = canvas.toDataURL('image/png');
+      let a = document.createElement('a');
+      a.download = 'card.png';
+      a.href = url;
+      a.textContent = 'Download card';
+      a.click();
     });
     await sleep(1000);
   }
   process();
-  buildTable(false);
+  var a = document.createElement('a');
+  a.download = 'my.png';
+  a.href = window.URL.createObjectURL(pngFile);
+  a.textContent = 'Download PNG';
+  // rebuild
+  buildTable();
 }
 
 function sleep(ms) {
