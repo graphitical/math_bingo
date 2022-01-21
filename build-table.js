@@ -161,10 +161,6 @@ function saveTable() {
     await sleep(1000);
   }
   process();
-  var a = document.createElement('a');
-  a.download = 'my.png';
-  a.href = window.URL.createObjectURL(pngFile);
-  a.textContent = 'Download PNG';
   // rebuild
   buildTable();
 }
